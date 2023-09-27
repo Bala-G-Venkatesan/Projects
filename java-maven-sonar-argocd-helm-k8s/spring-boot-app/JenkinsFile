@@ -26,8 +26,11 @@ pipeline {
       steps {
         script{
           def SONAR_URL = params.SONAR_URL
-          withCredentials([string(credentialID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}'
+           echo $SONAR_URL
+           withCredentials([string(credentialID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
+          '''
+          cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}
+          '''
       }
     }
     }
