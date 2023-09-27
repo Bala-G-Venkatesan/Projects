@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple_wording_app
+  labels:
+    name: simple_wording_app_deployment
+spec:
+  selector:
+    matchLabels:
+      name: simple_wording_app_pod
+  template:
+    metadata:
+      labels:
+        name: simple_wording_app_pod
+        app: web_app
+    spec:
+      containers:
+        - name: simple_wording_app
+          image: balajidevops1/myjavaspringbootapp:replaceImageTag
+  replicas: 3
