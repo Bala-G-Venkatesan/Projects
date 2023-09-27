@@ -57,7 +57,7 @@ pipeline {
         sh
           '''
           git config user.email "balamech769806@gmail.com"
-          git config user.name "Bala-G-Venkatesan"
+          git config user.name "V Balaji"
           sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
           git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
           git commit -m "Updating Manifest File for Kubernetes"
