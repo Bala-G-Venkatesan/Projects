@@ -24,8 +24,9 @@ pipeline {
         SONAR_URL = "http://13.232.93.70:9000"
       }
       steps {
-        withCredentials([string(credentialsID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
+        withCredentials([string(credentialsID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}'
+        }
       }
     }
     stage ('Build & Push Docker Image'){
@@ -50,7 +51,7 @@ pipeline {
         GITHUB_REPOSITORY = "My-Projects"
       }
       steps {
-        withCredentials([string(credentialsId : 'github', variable : 'github_token')])
+        withCredentials([string(credentialsId : 'github', variable : 'github_token')]){
         sh'''
           git config user.email "balamech769806@gmail.com"
           git config user.name "V Balaji"
@@ -59,8 +60,7 @@ pipeline {
           git commit -m "Updating Manifest File for Kubernetes"
           git push https://${github_token}@github.com/${GITHUB_USERNAME}/${GITHUB_REPOSITORY} HEAD:main
         '''
-
-
+        }
       }
     }
 
