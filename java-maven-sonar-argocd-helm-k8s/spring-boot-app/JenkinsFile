@@ -53,7 +53,7 @@ pipeline {
         GITHUB_REPOSITORY = "My-Projects"
       }
       steps {
-        withCredentials([string(credentialsId : 'git:hub', variable : 'github_token')])
+        withCredentials([string(credentialsId : 'github', variable : 'github_token')])
         sh
           '''
           git config user.email "balamech769806@gmail.com"
