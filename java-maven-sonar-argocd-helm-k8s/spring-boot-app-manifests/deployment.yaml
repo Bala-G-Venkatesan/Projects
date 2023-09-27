@@ -15,5 +15,5 @@ spec:
     spec:
       containers:
         - name: simple_wording_app
-          image: balajidevops1/myjavaspringbootapp:replaceImageTag
+          image: balajidevops1/myjavaspringbootapp:18
   replicas: 3
