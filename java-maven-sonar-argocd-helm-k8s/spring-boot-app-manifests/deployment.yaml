@@ -7,11 +7,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: simple_wording_app_pod
+      app: web_app
   template:
     metadata:
       labels:
-        name: simple_wording_app_pod
         app: web_app
     spec:
       containers:
