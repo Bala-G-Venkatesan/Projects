@@ -5,9 +5,6 @@ pipeline {
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
-  parameters {
-        string(name: 'SONAR_URL', defaultValue: 'http://default-sonarqube-url:9000', description: 'SonarQube URL')
-    }
   stages {
     stage ('CheckOut') {
       steps {
@@ -23,16 +20,14 @@ pipeline {
       }
     }
     stage ('SonarQube'){
-      steps {
-        script{
-          def SONAR_URL = params.SONAR_URL
-           echo $SONAR_URL
-           withCredentials([string(credentialID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
-          '''
-          cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}
-          '''
+      environment {
+        SONAR_URL = "http://13.232.93.70:9000"
       }
-    }
+      steps {
+        sh 'echo $SONAR_URL'
+        withCredentials([string(credentialID: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
+        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=${SONAR_AUTH_TOKEN} -Dsonar.host.url=${SONAR_URL}'
+      }
     }
     stage ('Build & Push Docker Image'){
       environment {
