@@ -9,4 +9,4 @@ spec:
       targetPort: 8080
       name: http
   selector:
-    app: web_app
+    app: web-app

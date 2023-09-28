@@ -16,4 +16,6 @@ spec:
       containers:
         - name: simple-wording-app
           image: balajidevops1/myjavaspringbootapp:18
+          ports:
+            - containerPort: 8080
   replicas: 3
