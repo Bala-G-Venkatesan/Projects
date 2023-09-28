@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple_wording_app_service
+  name: simple_wording-app-service
 spec:
   type: LoadBalancer
   ports:
